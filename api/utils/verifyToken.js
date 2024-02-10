@@ -4,7 +4,7 @@ import { createError } from "./error.js";
 export const verifyToken = (req, res, next) =>
 {
   const token = req.cookies.access;
-  console.log("token on verify" + req.cookies.access);
+ // console.log("token on verify" + req.cookies.access);
   if (!token)
   {
     return next(createError(401, "You are not authenticated")); // if theres no token
@@ -40,7 +40,7 @@ export const verifyUser = (req, res, next) =>
 
 export const verifyAdmin = (req, res, next) =>
 {
-  console.log("req::", req);
+ // console.log("req::", req);
   verifyToken(req, res, () =>
   {
     //console.log("req.user.isAdmi",req.user.isAdmin);
