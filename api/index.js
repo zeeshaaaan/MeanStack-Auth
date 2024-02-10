@@ -3,13 +3,19 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import roleRoute from './routes/role.js'
 import authRoute from './routes/auth.js'
+import userRoute from './routes/user.js'
+import cookieParser from 'cookie-parser';
+
+
 const app= express();
+
 dotenv.config();
 
 app.use(express.json())
-
-app.use("/api/role",roleRoute)
+app.use(cookieParser());
+app.use("/api/role",roleRoute) //roleRoute same as import name
 app.use("/api/auth",authRoute)
+app.use("/api/user",userRoute)
 
 //Response handler middleware
 app.use((obj,req,res,next)=>{

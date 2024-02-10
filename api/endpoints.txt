@@ -1,0 +1,44 @@
+post:http://localhost:8800/api/auth/register
+{
+        "firstName":"zeeshan2",
+        "lastName":"Ali2",
+        "userName":"zeeshan2",
+        "email":"zeesh2an1@gmail.com",
+        "password":"12134561"
+}
+
+post: http://localhost:8800/api/auth/login
+{
+    "email":"zash@gmail.com",
+    "password":"12345"
+}
+
+post: http://localhost:8800/api/auth/register-admin
+
+{
+        "firstName":"zees1",
+        "lastName":"Ali1",
+        "userName":"zees1",
+        "email":"zees@gmail.com",
+        "password":"123451"
+}
+
+
+
+FOR ROLES:
+
+get: http://localhost:8800/api/role/getAll 
+post: http://localhost:8800/api/role/create
+{
+    "role":"Dummy"
+}
+put: http://localhost:8800/api/role/update/:id
+{
+    "role":"Admin"
+}
+Delete: http://localhost:8800/api/role/deleteRole/:id
+
+
+
+get:http://localhost:8800/api/user/  (get all user)
+get: http://localhost:8800/api/user/65bf5208acf19d4004cd2109 (get user by id)
