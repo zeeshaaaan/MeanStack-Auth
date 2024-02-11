@@ -11,4 +11,8 @@ export class AuthService {
   registeredService(registerObj:any){
     return this.http.post<any>(`${apiurls.authServiceApi}register`,registerObj)
   }
+
+  loginService(loginObj:any){
+    return this.http.post<any>(`${apiurls.authServiceApi}login`,loginObj)
+  }
 }
