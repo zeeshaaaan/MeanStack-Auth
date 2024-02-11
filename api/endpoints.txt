@@ -42,3 +42,8 @@ Delete: http://localhost:8800/api/role/deleteRole/:id
 
 get:http://localhost:8800/api/user/  (get all user)
 get: http://localhost:8800/api/user/65bf5208acf19d4004cd2109 (get user by id)
+
+
+send-mail:
+
+post :http://localhost:8800/api/auth/send-email
