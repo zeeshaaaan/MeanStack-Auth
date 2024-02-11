@@ -4,7 +4,8 @@ import bcrypt from "bcryptjs";
 import { createError } from "../utils/error.js";
 import { createSuccess } from "../utils/success.js";
 import jwt from 'jsonwebtoken'
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
+import UserToken from "../models/UserToken.js";
 
 export const register = async (req, res, next) => {
   const role = await Role.find({ role: 'User' });
@@ -79,7 +80,7 @@ export const sendEmail = async (req, res, next) => {
   const payload = {
     email: user.email
   }
-  console.log("user",user);
+  console.log("user", user);
   const expiryTime = 300
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: expiryTime })
 
@@ -92,7 +93,7 @@ export const sendEmail = async (req, res, next) => {
     service: "gmail",
     auth: {
       user: "minshow24@gmail.com",
-      pass: gfghfhgfhg
+      pass: ""
     }
   });
 
