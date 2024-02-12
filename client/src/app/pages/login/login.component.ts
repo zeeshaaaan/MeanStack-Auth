@@ -30,6 +30,8 @@ export default class LoginComponent implements OnInit {
     this.authService.loginService(this.loginForm.value).subscribe({
       next:(res)=>{
         alert("Logged in successfully!!")
+        localStorage.setItem("user_Id",res.data._id)
+        this.authService.isLoggedIn$.next(true)
         this.loginForm.reset();
         this.router.navigate(['home'])
       },
