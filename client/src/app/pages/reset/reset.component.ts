@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { confirmpasswordValidator } from '../../validators/confirm-password-validator';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-reset',
@@ -17,6 +18,7 @@ export default class ResetComponent implements OnInit {
   resetForm!:FormGroup;
   router= inject(Router);
   activatedRoute = inject(ActivatedRoute)
+  authService = inject(AuthService)
   token!:string
 
   ngOnInit(): void {
@@ -36,7 +38,22 @@ export default class ResetComponent implements OnInit {
   }
 
   reset(){
-      console.log("RESET::",this.resetForm.value);
+      //console.log("RESET::",this.resetForm.value);
+      let resetObj={
+        token:this.token,
+        password:this.resetForm.value.password
+      }
+      this.authService.resetPasswordService(resetObj)
+      .subscribe({
+        next:(res)=>{
+          alert(res.message);
+          this.resetForm.reset();
+          this.router.navigate(['login'])
+        },
+        error:(err)=>{
+          alert(err.error.message)
+        }
+      })
   }
 
 }

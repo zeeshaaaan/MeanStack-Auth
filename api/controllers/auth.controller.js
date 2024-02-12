@@ -129,6 +129,34 @@ export const sendEmail = async (req, res, next) => {
   })
 }
 
+export const resetPassword = (req, res, next) => {
+  const token = req.body.token
+  const newPassword = req.body.password
+
+  jwt.verify(token, process.env.JWT_SECRET, async (err, data) => {
+    if (err) {
+      return next(createError(500, "Link Expired!!"))
+    }
+    else {
+      const response = data;
+      const user = await User.findOne({ email: { $regex: '^' + response.email + '$', $options: 'i' } });
+      const salt = await bcrypt.genSalt(10);
+      const encryptPassword = await bcrypt.hash(newPassword, salt);
+      user.password = encryptPassword;
+      try {
+        const updateduser = await User.findOneAndUpdate(
+          { _id: user._id },
+          { $set: user },
+          { new: true }
+        )
+        return next(createSuccess(200, "Password Reset success"))
+      } catch (error) {
+        return next(createError(500, "Something went wrong!"))
+      }
+    }
+  })
+}
+
 
 
 
